@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Weather App</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+      <script src="https://d3js.org/d3.v6.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="/style.css" rel="stylesheet">
+      <script src="input.js"></script>
+   </head>
+   <body>
+      <div class="search-bar">
+         <form id="location-form">
+           <input type="text" placeholder="Enter location" id="location-input">
+           <button class="btn btn-primary btn-rounded" type="submit">Search</button>
+         </form>
+       </div>
+      <main class="main-container">
+         <div class="cur-box">
+         <div class="main-location">
+            <h1 id="location" class="cur_location"></h1>
+            <div id="date"></div>
+         </div>
+         <div class="cur-temp">
+            <div class="cur-temp_icon_container">
+               <img class="cur-temp_icon" id="icon">
+            </div>
+            <div class="cur-temp_content">
+               <div class="cur-temp_value" id="temperature" ></div>
+            </div>
+         </div>
+         <div class="cur-vals">
+            <div>
+               <div class="cur-vals_style" id="high-temperature"></div>
+               <div class="cur-vals_label">High</div>
+               <div class="cur-vals_style" id="low-temperature"></div>
+               <div class="cur-vals_label">Low</div>
+            </div>
+            <div>
+               <div class="cur-vals_style" id="feel_high"></div>
+               <div class="cur-vals_label">FL High</div>
+               <div class="cur-vals_style" id="feel_low"></div>
+               <div class="cur-vals_label">FL low</div>
+            </div>
+            <div>
+               <div class="cur-vals_style" id="wind-speed"></div>
+               <div class="cur-vals_label">Wind</div>
+               <div class="cur-vals_style" id="rain-probability"></div>
+               <div class="cur-vals_label">Rain</div>
+            </div>
+         </div>
+      </div>
+         <h2 class="forcast-head">Next 7 days</h2>
+         <div class="forcast-head_container">
+            <div class="forcast-row" id="forcast-row-1">
+               <div class="forcast_date" id="day_date_1">
+               </div>
+               <div class="forcast_low" id="low_label_1">
+               </div>
+               <div class="forcast_high" id="high_label_1">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_1" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_1">
+               </div>
+               <div class="forcast_wind" id="wind_label_1">
+               </div>
+            </div>
+            <div class="forcast-row" id="forcast-row-2">
+               <div class="forcast_date" id="day_date_2">
+               </div>
+               <div class="forcast_low" id="low_label_2">
+               </div>
+               <div class="forcast_high" id="high_label_2">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_2" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_2">
+               </div>
+               <div class="forcast_wind" id="wind_label_2">
+               </div>
+            </div>
+            <div class="forcast-row" id="forcast-row-3">
+               <div class="forcast_date" id="day_date_3">
+               </div>
+               <div class="forcast_low" id="low_label_3">
+               </div>
+               <div class="forcast_high" id="high_label_3">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_3" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_3">
+               </div>
+               <div class="forcast_wind" id="wind_label_3">
+               </div>
+            </div>
+            <div class="forcast-row" id="forcast-row-4">
+               <div class="forcast_date" id="day_date_4">
+               </div>
+               <div class="forcast_low" id="low_label_4">
+               </div>
+               <div class="forcast_high" id="high_label_4">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_4" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_4">
+               </div>
+               <div class="forcast_wind" id="wind_label_4">
+               </div>
+            </div>
+            <div class="forcast-row" id="forcast-row-5">
+               <div class="forcast_date" id="day_date_5">
+               </div>
+               <div class="forcast_low" id="low_label_5">
+               </div>
+               <div class="forcast_high" id="high_label_5">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_5" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_5">
+               </div>
+               <div class="forcast_wind" id="wind_label_5">
+               </div>
+            </div>
+            <div class="forcast-row" id="forcast-row-6">
+               <div class="forcast_date" id="day_date_6">
+               </div>
+               <div class="forcast_low" id="low_label_6">
+               </div>
+               <div class="forcast_high" id="high_label_6">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_6" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_6">
+               </div>
+               <div class="forcast_wind" id="wind_label_6">
+               </div>
+            </div>
+            <div class="forcast-row" id="forcast-row-7">
+               <div class="forcast_date" id="day_date_7">
+               </div>
+               <div class="forcast_low" id="low_label_7">
+               </div>
+               <div class="forcast_high" id="high_label_7">
+               </div>
+               <div class="forcast_icon">
+                  <img id="icon_label_7" height="50px">
+               </div>
+               <div class="forcast_rain" id="rain_label_7">
+               </div>
+               <div class="forcast_wind" id="wind_label_7">
+               </div>
+            </div>
+            <div class="hourly-weather">
+               <h2 class="hourly-weather_heading">Today's weather</h2>
+               <div class="hourly-weather_container">
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_1"></div>
+                     <img id="hourly-icon-1" height="50px">
+                     <div id="hourly_temp_1"></div>
+                  </div>
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_2"></div>
+                     <img id="hourly-icon-2" height="50px">
+                     <div id="hourly_temp_2"></div>
+                  </div>
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_3"></div>
+                     <img id="hourly-icon-3" height="50px">
+                     <div id="hourly_temp_3"></div>
+                  </div>
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_4"></div>
+                     <img id="hourly-icon-4" height="50px">
+                     <div id="hourly_temp_4"></div>
+                  </div>
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_5"></div>
+                     <img id="hourly-icon-5" height="50px">
+                     <div id="hourly_temp_5"></div>
+                  </div>
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_6"></div>
+                     <img id="hourly-icon-6" height="50px">
+                     <div id="hourly_temp_6"></div>
+                  </div>
+                  <div class="hourly-weather_item">
+                     <div class="hourly-weather_hour" id="hourly_time_7"></div>
+                     <img id="hourly-icon-7" height="50px">
+                     <div id="hourly_temp_7"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="hourly-weather_graph"></div>
+      </main>
+   </body>
+</html>
